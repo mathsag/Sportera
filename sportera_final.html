@@ -1,0 +1,1942 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sportera | Profesjonell støtte for idrettslag</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        :root {
+            --primary: #0f2745;
+            --primary-light: #1a3f6b;
+            --accent: #1E88E5;
+            --accent-dark: #1976D2;
+            --gold: #f59e0b;
+            --text: #1e293b;
+            --text-light: #64748b;
+            --bg: #ffffff;
+            --bg-gray: #f8fafc;
+            --border: #e2e8f0;
+            --success: #10b981;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            color: var(--text);
+            background-color: var(--bg);
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        
+        /* Navigation */
+        nav {
+            background: #ffffff;
+            border-bottom: 1px solid var(--border);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        
+        .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        
+        .logo-image {
+            height: 44px;
+            width: auto;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+        
+        .nav-cta {
+            background: var(--accent);
+            color: white !important;
+            padding: 10px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: background 0.3s, transform 0.2s;
+        }
+        
+        .nav-cta:hover {
+            background: var(--accent-dark);
+            transform: translateY(-1px);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 100px 40px 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        
+        .hero-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 24px;
+            line-height: 1.1;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.2s forwards;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.25rem;
+            opacity: 0;
+            margin-bottom: 40px;
+            line-height: 1.6;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 0.8s ease-out 0.5s forwards;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.8s forwards;
+        }
+        
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+            padding: 16px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.05rem;
+            display: inline-block;
+            transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+        }
+        
+        .btn-primary:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.3);
+        }
+        
+        .btn-secondary {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            padding: 16px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.05rem;
+            display: inline-block;
+            border: 2px solid rgba(255,255,255,0.3);
+            transition: background 0.3s, border-color 0.3s;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.15);
+            border-color: rgba(255,255,255,0.5);
+        }
+        
+        /* Value Proposition */
+        .value-section {
+            background: var(--bg-gray);
+            padding: 80px 40px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+        }
+        
+        .value-item {
+            background: white;
+            padding: 40px 32px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .value-item.visible {
+            animation: fadeInUp 0.5s ease-out forwards;
+        }
+        
+        .value-icon {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+        
+        .value-item h3 {
+            font-size: 1.15rem;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+        
+        .value-item p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+        
+        /* Pricing Banner */
+        .pricing-banner {
+            background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .pricing-banner h3 {
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+        }
+        
+        .pricing-banner p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Compact Services on Homepage */
+        .services-preview {
+            padding: 80px 40px;
+            background: white;
+        }
+        
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 60px;
+        }
+        
+        .section-label {
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+        
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .section-description {
+            font-size: 1.15rem;
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+        
+        .services-compact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .service-compact-card {
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 32px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .service-compact-card.visible {
+            animation: fadeInUp 0.5s ease-out forwards;
+        }
+        
+        .service-compact-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 12px 32px rgba(30, 136, 229, 0.12);
+            transform: translateY(-6px);
+        }
+        
+        .service-compact-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        
+        .service-compact-letter {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+            color: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            font-family: 'Outfit', sans-serif;
+            flex-shrink: 0;
+        }
+        
+        .service-compact-card h3 {
+            font-size: 1.3rem;
+            color: var(--primary);
+        }
+        
+        .service-compact-card p {
+            color: var(--text-light);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+        
+        .view-all-services {
+            text-align: center;
+            margin-top: 48px;
+        }
+        
+        /* Services Section with Tabs */
+        .services-section {
+            padding: 60px 40px 100px;
+            background: white;
+        }
+        
+        /* Service Tabs - FIXED positioning */
+        .service-tabs-wrapper {
+            position: sticky;
+            top: 85px;
+            background: white;
+            z-index: 100;
+            padding: 24px 0;
+            margin-bottom: 40px;
+            border-bottom: 2px solid var(--border);
+        }
+        
+        .service-tabs {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 0;
+        }
+        
+        .service-tab {
+            background: var(--bg-gray);
+            border: 2px solid var(--border);
+            padding: 16px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: fit-content;
+        }
+        
+        .service-tab-letter {
+            width: 32px;
+            height: 32px;
+            background: var(--text-light);
+            color: white;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1rem;
+            font-family: 'Outfit', sans-serif;
+        }
+        
+        .service-tab-text {
+            font-weight: 600;
+            color: var(--text);
+        }
+        
+        .service-tab:hover {
+            background: white;
+            border-color: var(--accent);
+        }
+        
+        .service-tab.active {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+            border-color: var(--accent);
+        }
+        
+        .service-tab.active .service-tab-letter {
+            background: white;
+            color: var(--accent);
+        }
+        
+        .service-tab.active .service-tab-text {
+            color: white;
+        }
+        
+        /* Service Content */
+        .service-content {
+            display: none;
+            animation: fadeIn 0.4s;
+        }
+        
+        .service-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .service-detail-card {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--bg-gray);
+            border-radius: 16px;
+            padding: 48px;
+            border: 2px solid var(--border);
+        }
+        
+        .service-detail-header {
+            margin-bottom: 32px;
+            padding-bottom: 32px;
+            border-bottom: 2px solid var(--border);
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out 0.1s forwards;
+        }
+        
+        .service-detail-title {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+        
+        .service-detail-goal {
+            font-size: 1.2rem;
+            color: var(--accent);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .service-detail-goal::before {
+            content: '→';
+            color: var(--gold);
+            font-weight: 700;
+        }
+        
+        .service-detail-intro {
+            background: white;
+            padding: 32px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text);
+            border-left: 4px solid var(--accent);
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out 0.3s forwards;
+        }
+        
+        .service-detail-intro p {
+            margin-bottom: 16px;
+        }
+        
+        .service-detail-intro p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .service-detail-sections {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 32px;
+        }
+        
+        .service-detail-section {
+            background: white;
+            padding: 32px;
+            border-radius: 12px;
+            opacity: 0;
+        }
+        
+        .service-detail-section:nth-child(1) {
+            animation: fadeInUp 0.5s ease-out 0.5s forwards;
+        }
+        
+        .service-detail-section:nth-child(2) {
+            animation: fadeInUp 0.5s ease-out 0.6s forwards;
+        }
+        
+        .service-detail-section:nth-child(3) {
+            animation: fadeInUp 0.5s ease-out 0.7s forwards;
+        }
+        
+        .service-detail-section:nth-child(4) {
+            animation: fadeInUp 0.5s ease-out 0.8s forwards;
+        }
+        
+        .service-detail-section h4 {
+            color: var(--primary);
+            font-size: 1.3rem;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .service-detail-section h4::before {
+            content: '✓';
+            color: var(--success);
+            font-weight: 700;
+        }
+        
+        .service-detail-section p {
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        
+        .service-detail-section ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .service-detail-section li {
+            padding: 8px 0;
+            color: var(--text-light);
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            line-height: 1.6;
+        }
+        
+        .service-detail-section li::before {
+            content: '•';
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            border-left: 4px solid var(--accent);
+            padding: 24px;
+            border-radius: 8px;
+            margin-top: 24px;
+        }
+        
+        .highlight-box h5 {
+            color: var(--primary);
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+        
+        .highlight-box p {
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+        
+        .highlight-box p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .service-contact-btn {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            margin-top: 32px;
+            transition: background 0.3s, transform 0.2s;
+        }
+        
+        .service-contact-btn:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
+        }
+        
+        /* Approach Section */
+        .approach-section {
+            background: var(--primary);
+            color: white;
+            padding: 100px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .approach-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(45deg, transparent 30%, rgba(59, 130, 246, 0.05) 30%, rgba(59, 130, 246, 0.05) 70%, transparent 70%);
+            background-size: 60px 60px;
+        }
+        
+        .approach-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .approach-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+            margin-top: 60px;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .approach-card {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            padding: 32px 24px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .approach-card.visible {
+            animation: fadeInUp 0.5s ease-out forwards;
+        }
+        
+        .approach-number {
+            width: 48px;
+            height: 48px;
+            background: var(--accent);
+            color: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            font-family: 'Outfit', sans-serif;
+            margin: 0 auto 20px;
+        }
+        
+        .approach-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+            color: white;
+        }
+        
+        .approach-card p {
+            opacity: 0.9;
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+        
+        /* About Section */
+        .about-section {
+            padding: 100px 40px;
+            background: var(--bg-gray);
+        }
+        
+        .about-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 60px;
+            align-items: start;
+        }
+        
+        .about-profile {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            border: 2px solid var(--border);
+            text-align: center;
+            position: sticky;
+            top: 100px;
+        }
+        
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            font-weight: 800;
+            font-family: 'Outfit', sans-serif;
+            margin: 0 auto 24px;
+        }
+        
+        .profile-name {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+        
+        .profile-title {
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+        
+        .profile-credentials {
+            text-align: left;
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 2px solid var(--bg-gray);
+        }
+        
+        .credential-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            color: var(--text);
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        
+        .credential-icon {
+            display: none;
+        }
+        
+        .about-text h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 24px;
+        }
+        
+        .about-text h3 {
+            font-size: 1.6rem;
+            color: var(--primary);
+            margin: 40px 0 20px;
+        }
+        
+        .about-text p {
+            color: var(--text);
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+        }
+        
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin: 24px 0;
+        }
+        
+        .expertise-item {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent);
+        }
+        
+        .expertise-item h4 {
+            color: var(--primary);
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+        
+        .expertise-item p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin: 0;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+            color: white;
+            padding: 100px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 1000px;
+            height: 1000px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        
+        .cta-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .cta-section h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 24px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+        
+        .cta-section p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            margin-bottom: 40px;
+            line-height: 1.7;
+        }
+        
+        .btn-cta {
+            background: white;
+            color: var(--accent);
+            padding: 18px 48px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            display: inline-block;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-cta::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(30, 136, 229, 0.1);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .btn-cta:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .btn-cta:hover {
+            transform: scale(1.1) translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-cta:active {
+            transform: scale(1.05) translateY(-2px);
+        }
+        
+        .btn-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 80px 40px 40px;
+        }
+        
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+            gap: 60px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-brand .logo-icon {
+            background: white;
+            color: var(--accent);
+        }
+        
+        .footer-brand .logo-text {
+            color: white;
+        }
+        
+        .footer-about p {
+            opacity: 0.8;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        
+        .footer-section h4 {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 40px;
+            text-align: center;
+            opacity: 0.6;
+            font-size: 0.9rem;
+        }
+        
+        /* Page Management */
+        .page {
+            display: none;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .approach-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-profile {
+                position: static;
+            }
+            
+            .service-detail-sections {
+                grid-template-columns: 1fr;
+            }
+            
+            .services-compact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-content {
+                padding: 0 20px;
+            }
+            
+            .nav-links a:not(.nav-cta) {
+                display: none;
+            }
+            
+            .hero {
+                padding: 80px 20px 60px;
+            }
+            
+            .services-section,
+            .approach-section,
+            .cta-section,
+            .about-section,
+            .services-preview {
+                padding: 60px 20px;
+            }
+            
+            .value-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .approach-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .service-tabs {
+                flex-wrap: nowrap;
+            }
+            
+            .service-detail-card {
+                padding: 32px 24px;
+            }
+            
+            .expertise-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .service-tabs-wrapper {
+                top: 75px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-content">
+            <a href="#" class="logo" onclick="showPage('home')">
+                <img src="sportera-logo-horizontal.png" alt="Sportera" class="logo-image">
+            </a>
+            <div class="nav-links">
+                <a href="#" onclick="showPage('home')">Hjem</a>
+                <a href="#" onclick="showPage('services')">Tjenester</a>
+                <a href="#" onclick="showPage('about')">Om oss</a>
+                <a href="#kontakt" class="nav-cta">Kontakt oss</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HOME PAGE -->
+    <div id="home" class="page active">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Profesjonell støtte for idrettslag</h1>
+                <p class="hero-subtitle">Vi støtter idrettslag med kompetanse og kapasitet i områder der dere trenger det mest – uten faste ansettelser. Provisjonsbasert på sponsorer og søknader betyr minimal risiko.</p>
+                <div class="hero-buttons">
+                    <a href="#kontakt" class="btn-primary">Ta kontakt</a>
+                    <a href="#" onclick="showPage('services')" class="btn-secondary">Se alle tjenester</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Value Proposition -->
+        <section class="value-section">
+            <div class="container">
+                <div class="value-grid">
+                    <div class="value-item">
+                        <div class="value-icon">💰</div>
+                        <h3>Økte inntekter</h3>
+                        <p>Støtte til sponsorer og støtteordninger som gir resultater</p>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-icon">⚡</div>
+                        <h3>Støtte der det trengs</h3>
+                        <p>Vi fyller hullene i kapasitet og kompetanse</p>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-icon">📊</div>
+                        <h3>Bedre struktur</h3>
+                        <p>Rutiner og systemer som sikrer kontinuitet</p>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-icon">🎯</div>
+                        <h3>Konkrete resultater</h3>
+                        <p>Ferdig arbeid dere kan bruke med en gang</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Banner -->
+        <section class="pricing-banner">
+            <div class="container">
+                <h3>Provisjonsbasert på resultater</h3>
+                <p>For sponsorer og søknader tar vi provisjon når dere får inntekter – ingen risiko før dere ser resultater. Andre tjenester prises etter omfang og tilpasses deres budsjett.</p>
+            </div>
+        </section>
+
+        <!-- Compact Services Preview -->
+        <section class="services-preview">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-label">Våre tjenester</div>
+                    <h2 class="section-title">Åtte områder vi støtter idrettslag</h2>
+                    <p class="section-description">Velg enkeltoppgaver eller kombiner flere områder</p>
+                </div>
+
+                <div class="services-compact-grid">
+                    <div class="service-compact-card" onclick="showPage('services'); showService('service-a')">
+                        <div class="service-compact-header">
+                            <div class="service-compact-letter">A</div>
+                            <h3>Søknader og finansiering</h3>
+                        </div>
+                        <p>Vi kartlegger støtteordninger og skriver søknader – også for kommuner som søker støtte til idrettsarrangementer. Provisjon når søknader innvilges.</p>
+                    </div>
+
+                    <div class="service-compact-card" onclick="showPage('services'); showService('service-b')">
+                        <div class="service-compact-header">
+                            <div class="service-compact-letter">B</div>
+                            <h3>Sponsor og samarbeid</h3>
+                        </div>
+                        <p>Fra sponsorstruktur til salg og oppfølging. Vi hjelper med hele prosessen for å bygge langsiktige og lønnsomme partnerskap.</p>
+                    </div>
+
+                    <div class="service-compact-card" onclick="showPage('services'); showService('service-c')">
+                        <div class="service-compact-header">
+                            <div class="service-compact-letter">C</div>
+                            <h3>Arrangement</h3>
+                        </div>
+                        <p>Bistand til planlegging og gjennomføring av cuper, turneringer og arrangementer som gir bedre inntjening og fornøyde frivillige.</p>
+                    </div>
+
+                    <div class="service-compact-card" onclick="showPage('services'); showService('service-d')">
+                        <div class="service-compact-header">
+                            <div class="service-compact-letter">D</div>
+                            <h3>Kommunikasjon</h3>
+                        </div>
+                        <p>Praktisk støtte til nettsider, sosiale medier og synliggjøring av partnere – tilpasset deres kapasitet.</p>
+                    </div>
+
+                    <div class="service-compact-card" onclick="showPage('services'); showService('service-e')">
+                        <div class="service-compact-header">
+                            <div class="service-compact-letter">E</div>
+                            <h3>Nettsider</h3>
+                        </div>
+                        <p>Enkle nettsider som er lette å vedlikeholde. Ingen tung teknologi, ingen dyre månedlige kostnader.</p>
+                    </div>
+
+                    <div class="service-compact-card" onclick="showPage('services'); showService('service-f')">
+                        <div class="service-compact-header">
+                            <div class="service-compact-letter">F</div>
+                            <h3>Prosjektdeltakelse</h3>
+                        </div>
+                        <p>Midlertidig prosjektstøtte eller ledelse i omstillinger, utviklingsprosjekter og større satsninger.</p>
+                    </div>
+
+                    <div class="service-compact-card" onclick="showPage('services'); showService('service-g')">
+                        <div class="service-compact-header">
+                            <div class="service-compact-letter">G</div>
+                            <h3>Ekstern gjennomgang</h3>
+                        </div>
+                        <p>Helhetlig gjennomgang av organisering, økonomi og drift – med konkrete anbefalinger og prioriteringer.</p>
+                    </div>
+
+                    <div class="service-compact-card" onclick="showPage('services'); showService('service-h')">
+                        <div class="service-compact-header">
+                            <div class="service-compact-letter">H</div>
+                            <h3>Digital markedsføring</h3>
+                        </div>
+                        <p>Kartlegging av eksisterende tiltak og utvikling av strategi for sosiale medier og digitale kanaler tilpasset ulike målgrupper.</p>
+                    </div>
+                </div>
+
+                <div class="view-all-services">
+                    <a href="#" onclick="showPage('services')" class="btn-primary">Se full beskrivelse av alle tjenester →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Coming Soon Section -->
+        <section class="value-section">
+            <div class="container">
+                <div class="section-header" style="margin-bottom: 40px;">
+                    <div class="section-label">Kommer snart</div>
+                    <h2 class="section-title">Nye verktøy under utvikling</h2>
+                    <p class="section-description">Vi jobber med digitale løsninger som vil løfte sponsorarbeidet til neste nivå</p>
+                </div>
+                
+                <div class="value-grid" style="grid-template-columns: repeat(2, 1fr);">
+                    <div class="value-item" style="text-align: left; padding: 48px 40px;">
+                        <div class="value-icon" style="margin-bottom: 24px;">📱</div>
+                        <h3 style="font-size: 1.4rem; margin-bottom: 16px;">Digital sponsorapp</h3>
+                        <p style="font-size: 1.05rem; line-height: 1.7;">
+                            En digital løsning som øker eksponeringen av samarbeidspartnere og gir bedriftene en direkte kommunikasjonsflate med medlemmene. Dette løfter kvaliteten på sponsorsamarbeidet, samtidig som medlemmene får mer verdi gjennom tilbud, rabatter og relevant informasjon fra sponsorene.
+                        </p>
+                        <p style="font-size: 0.95rem; color: var(--accent); font-weight: 600; margin-top: 16px;">
+                            Pilottestes nå – interesserte klubber kan bli med
+                        </p>
+                    </div>
+                    
+                    <div class="value-item" style="text-align: left; padding: 48px 40px;">
+                        <div class="value-icon" style="margin-bottom: 24px;">🎯</div>
+                        <h3 style="font-size: 1.4rem; margin-bottom: 16px;">Lojalitetsprogram</h3>
+                        <p style="font-size: 1.05rem; line-height: 1.7;">
+                            For større idrettslag utvikler vi lojalitetsprogrammer som binder medlemmer og sponsorer tettere sammen. Dette kan inkludere medlemsfordeler, eksklusiv tilgang til arrangementer, og strukturerte partnerskapsprogrammer som gir langsiktig verdi for alle parter.
+                        </p>
+                        <p style="font-size: 0.95rem; color: var(--accent); font-weight: 600; margin-top: 16px;">
+                            Lanseres for utvalgte klubber i 2026
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Approach Section -->
+        <section class="approach-section">
+            <div class="container approach-content">
+                <div class="section-header">
+                    <div class="section-label" style="color: var(--gold);">Vår tilnærming</div>
+                    <h2 class="section-title" style="color: white;">Slik jobber vi med idrettslag</h2>
+                    <p class="section-description" style="color: rgba(255,255,255,0.9);">Fire prinsipper som sikrer varig verdi for klubben.</p>
+                </div>
+                
+                <div class="approach-grid">
+                    <div class="approach-card">
+                        <div class="approach-number">1</div>
+                        <h3>Tilpasset idrettens virkelighet</h3>
+                        <p>Løsninger skreddersydd for klubbens situasjon – ikke standardoppskrifter fra næringslivet.</p>
+                    </div>
+                    
+                    <div class="approach-card">
+                        <div class="approach-number">2</div>
+                        <h3>Praktisk og gjennomførbart</h3>
+                        <p>Vi leverer konkrete resultater som skaper faktisk verdi – ikke bare fine planer.</p>
+                    </div>
+                    
+                    <div class="approach-card">
+                        <div class="approach-number">3</div>
+                        <h3>Lavterskel støtte</h3>
+                        <p>Enkelt å komme i gang, tydelig verdi fra dag én. Vi starter der klubben er.</p>
+                    </div>
+                    
+                    <div class="approach-card">
+                        <div class="approach-number">4</div>
+                        <h3>Samarbeid, ikke overstyring</h3>
+                        <p>Vi jobber med klubben. Dere bestemmer retning, vi støtter med kompetanse.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section" id="kontakt">
+            <div class="cta-content">
+                <h2>Vil du vite mer?</h2>
+                <p>Ta kontakt for å diskutere hvordan vi kan støtte ditt idrettslag. Vi svarer raskt og konkret på dine spørsmål.</p>
+                <a href="mailto:kontakt@sportera.no" class="btn-cta">Send e-post</a>
+            </div>
+        </section>
+    </div>
+
+    <!-- SERVICES PAGE -->
+    <div id="services" class="page">
+        <section class="services-section">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-label">Våre tjenester</div>
+                    <h2 class="section-title">Full oversikt over tjenestene</h2>
+                    <p class="section-description">Velg en tjeneste under for å se detaljert beskrivelse</p>
+                </div>
+
+                <!-- Service Tabs - STICKY -->
+                <div class="service-tabs-wrapper">
+                    <div class="service-tabs">
+                        <div class="service-tab active" onclick="showService('service-a')">
+                            <div class="service-tab-letter">A</div>
+                            <div class="service-tab-text">Søknader</div>
+                        </div>
+                        <div class="service-tab" onclick="showService('service-b')">
+                            <div class="service-tab-letter">B</div>
+                            <div class="service-tab-text">Sponsorer</div>
+                        </div>
+                        <div class="service-tab" onclick="showService('service-c')">
+                            <div class="service-tab-letter">C</div>
+                            <div class="service-tab-text">Arrangement</div>
+                        </div>
+                        <div class="service-tab" onclick="showService('service-d')">
+                            <div class="service-tab-letter">D</div>
+                            <div class="service-tab-text">Kommunikasjon</div>
+                        </div>
+                        <div class="service-tab" onclick="showService('service-e')">
+                            <div class="service-tab-letter">E</div>
+                            <div class="service-tab-text">Nettsider</div>
+                        </div>
+                        <div class="service-tab" onclick="showService('service-f')">
+                            <div class="service-tab-letter">F</div>
+                            <div class="service-tab-text">Prosjekt</div>
+                        </div>
+                        <div class="service-tab" onclick="showService('service-g')">
+                            <div class="service-tab-letter">G</div>
+                            <div class="service-tab-text">Gjennomgang</div>
+                        </div>
+                        <div class="service-tab" onclick="showService('service-h')">
+                            <div class="service-tab-letter">H</div>
+                            <div class="service-tab-text">Markedsføring</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service A Content -->
+                <div id="service-a" class="service-content active">
+                    <div class="service-detail-card">
+                        <div class="service-detail-header">
+                            <h2 class="service-detail-title">Søknader og finansiering</h2>
+                            <div class="service-detail-goal">Sikre inntekter og spare tid</div>
+                        </div>
+                        <div class="service-detail-intro">
+                            <p>Det finnes hundrevis av støtteordninger, fond og tilskudd – men hvem har tid til å finne dem, forstå kravene og skrive gode søknader? For mange idrettslag blir søknader liggende, frister går ut, og penger som klubben kunne fått blir aldri hentet inn.</p>
+                            <p>Vi tar hele prosessen, fra kartlegging til innlevering og rapportering. Dere får ferdige søknader som maksimerer sjansene for å få midlene dere fortjener. Provisjonsbasert – vi tjener når dere får innvilget støtte.</p>
+                        </div>
+                        <div class="service-detail-sections">
+                            <div class="service-detail-section">
+                                <h4>Hva vi gjør</h4>
+                                <p>Vi starter med en grundig kartlegging av hvilke støtteordninger som passer for deres aktiviteter. Deretter skriver vi komplette søknader med budsjetter, prosjektbeskrivelser og all dokumentasjon som trengs.</p>
+                                <ul>
+                                    <li>Kartlegger alle relevante støtteordninger for deres aktiviteter</li>
+                                    <li>Skriver komplette søknader til kommuner, fylker og idrettskretser</li>
+                                    <li>Håndterer spillemiddelsøknader med dokumentasjon</li>
+                                    <li>Setter opp prosjektsøknader til stiftelser og næringsfond</li>
+                                    <li>Utarbeider realistiske budsjetter og finansieringsplaner</li>
+                                    <li>Følger opp søknader og håndterer eventuelle tilleggskrav</li>
+                                    <li>Rapporterer tilbake til støttegivere når det kreves</li>
+                                </ul>
+                            </div>
+                            <div class="service-detail-section">
+                                <h4>Hva dere får</h4>
+                                <p>Resultatet er ferdige søknader dere kan sende inn med én gang, samt et system som gjør det enkelt å holde oversikt over frister og krav fremover.</p>
+                                <ul>
+                                    <li>Fullstendige søknader klare til innsending</li>
+                                    <li>Oversikt over søknadsfrister hele året</li>
+                                    <li>Dokumentasjonsmal dere kan gjenbruke</li>
+                                    <li>Oppfølgingsplan med milepæler</li>
+                                    <li>Arkiverbar prosjektdokumentasjon</li>
+                                    <li>Rapportmaler for enkelt etterarbeid</li>
+                                    <li>Økt sjanse for å få innvilget støtte</li>
+                                </ul>
+                                <div class="highlight-box">
+                                    <h5>Søknader for kommuner</h5>
+                                    <p>Vi skriver også søknader for kommuner og andre virksomheter som søker støtte til idrettsrelaterte arrangementer. Mange kommuner arrangerer eller støtter større idrettseventer, og har samme behov for profesjonell søknadshjelp som idrettslagene selv.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="text-align: center; margin-top: 40px; padding-top: 32px; border-top: 2px solid var(--border);">
+                            <a href="mailto:kontakt@sportera.no?subject=Forespørsel om søknader og finansiering" class="service-contact-btn">Ta kontakt om denne tjenesten</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service B Content -->
+                <div id="service-b" class="service-content">
+                    <div class="service-detail-card">
+                        <div class="service-detail-header">
+                            <h2 class="service-detail-title">Sponsor og samarbeid</h2>
+                            <div class="service-detail-goal">Profesjonalisere kommersielle inntekter</div>
+                        </div>
+                        <div class="service-detail-intro">
+                            <p>Sponsorinntekter er ofte den viktigste finansieringskilden, men mange klubber mister avtaler, priser for lavt eller mangler kapasitet til oppfølging. Vi hjelper dere med å bygge en sponsorstruktur som gir forutsigbare inntekter og fornøyde partnere – år etter år.</p>
+                            <p>Gjennom strukturert arbeid med prissetting, pakker og oppfølging kan klubben øke både antall sponsorer og inntekt per avtale. Vi sørger for at partnerne faktisk får den verdien de betaler for. Provisjonsbasert på nye avtaler og økte inntekter.</p>
+                        </div>
+                        <div class="service-detail-sections">
+                            <div class="service-detail-section">
+                                <h4>Strategi og salg</h4>
+                                <p>Vi starter med en gjennomgang av deres nåværende sponsorarbeid, så utvikler vi en struktur som er enkel å selge og lett å levere på. Deretter tar vi kontakt med potensielle partnere og forhandler frem gode avtaler.</p>
+                                <ul>
+                                    <li>Gjennomgang av eksisterende sponsoravtaler og verdivurdering</li>
+                                    <li>Utvikling av sponsornivåer (hoved-, medsponsor, samarbeidspartner)</li>
+                                    <li>Definering av sponsorpakker med tydelige ytelser</li>
+                                    <li>Prissetting basert på faktisk verdi</li>
+                                    <li>Identifisering av nye potensielle sponsorer i lokalområdet</li>
+                                    <li>Utforming av profesjonelle sponsorpresentasjoner</li>
+                                    <li>Dialog og forhandling med partnere</li>
+                                    <li>Kontrakter med tydelige leveranser</li>
+                                </ul>
+                            </div>
+                            <div class="service-detail-section">
+                                <h4>Oppfølging og verdilevering</h4>
+                                <p>En sponsoravtale er bare god hvis partneren opplever verdi. Vi setter opp systemer for aktivering, rapportering og synliggjøring som sikrer at sponsorene får det de betaler for – og ønsker å fornye.</p>
+                                <ul>
+                                    <li>Årshjul for sponsoraktivering og rapportering</li>
+                                    <li>Bilder, materiale og synlighet som leverer verdi</li>
+                                    <li>Evalueringer som sikrer fornøyde partnere</li>
+                                    <li>Fornyelsesprosesser med god tid før utløp</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div style="text-align: center; margin-top: 40px; padding-top: 32px; border-top: 2px solid var(--border);">
+                            <a href="mailto:kontakt@sportera.no?subject=Forespørsel om sponsor og samarbeid" class="service-contact-btn">Ta kontakt om denne tjenesten</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service C Content -->
+                <div id="service-c" class="service-content">
+                    <div class="service-detail-card">
+                        <div class="service-detail-header">
+                            <h2 class="service-detail-title">Arrangement</h2>
+                            <div class="service-detail-goal">Bistand til gjennomføring og inntektsoptimalisering</div>
+                        </div>
+                        <div class="service-detail-intro">
+                            <p>Cuper, turneringer og store hjemmekamper kan være gode inntektskilder, men krever grundig planlegging og koordinering. Mange klubber opplever at arrangementer blir tyngre enn forventet, at frivillige går seg lei, eller at inntjeningspotensialet ikke utnyttes fullt ut.</p>
+                            <p>Vi støtter med struktur, rollefordeling og praktiske løsninger som gjør arrangementene enklere å gjennomføre – og mer lønnsomme. Målet er at arrangementet både gir gode opplevelser og bedre økonomi, uten at frivillige brenner seg ut.</p>
+                        </div>
+                        <div class="service-detail-sections">
+                            <div class="service-detail-section">
+                                <h4>Planlegging og struktur</h4>
+                                <p>God planlegging er nøkkelen til vellykkede arrangementer. Vi lager en komplett plan som viser hvem som gjør hva, når det skal gjøres, og hvordan dere tjener mest mulig. Planen er tilpasset klubbens kapasitet og erfaring.</p>
+                                <ul>
+                                    <li>Komplett arrangementsplan med tidslinje og milepæler</li>
+                                    <li>Rollefordeling og ansvarskart for alle funksjoner</li>
+                                    <li>Dugnadslister med tydelige oppgaver og tidspunkter</li>
+                                    <li>Kommunikasjonsplan for påmelding og informasjon</li>
+                                    <li>Budsjett og inntektsmodell (påmelding, kiosk, salg)</li>
+                                    <li>Oppsett for mat, drikke og salgsprodukter</li>
+                                    <li>Koordinering med eksterne leverandører</li>
+                                </ul>
+                            </div>
+                            <div class="service-detail-section">
+                                <h4>Gjennomføring og oppfølging</h4>
+                                <p>Under selve arrangementet kan vi være tilstede for å koordinere, løse problemer og sørge for at alt går som planlagt. Etterpå evaluerer vi sammen, slik at neste arrangement blir enda bedre.</p>
+                                <ul>
+                                    <li>Koordinering av frivillige under arrangementet</li>
+                                    <li>Løpende oversikt over bemanning og innsats</li>
+                                    <li>Problemløsning og fleksibilitet på arrangementsdagen</li>
+                                    <li>Salgsrapporter og inntektsoversikt</li>
+                                    <li>Foto og dokumentasjon til sosiale medier</li>
+                                    <li>Evaluering med frivillige og styret</li>
+                                    <li>Erfaringsnotat til neste arrangement</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div style="text-align: center; margin-top: 40px; padding-top: 32px; border-top: 2px solid var(--border);">
+                            <a href="mailto:kontakt@sportera.no?subject=Forespørsel om arrangement" class="service-contact-btn">Ta kontakt om denne tjenesten</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service D Content -->
+                <div id="service-d" class="service-content">
+                    <div class="service-detail-card">
+                        <div class="service-detail-header">
+                            <h2 class="service-detail-title">Kommunikasjon og synlighet</h2>
+                            <div class="service-detail-goal">Tydeligere og mer strukturert kommunikasjon</div>
+                        </div>
+                        <div class="service-detail-intro">
+                            <p>God kommunikasjon handler ikke om å poste hver dag, men om å nå riktig publikum med riktig informasjon. Mange klubber vil kommunisere bedre, men mangler tid, struktur eller kompetanse til å få det til i praksis.</p>
+                            <p>Vi hjelper dere med å bygge en kommunikasjonsstruktur som fungerer – tilpasset klubbens faktiske kapasitet. Målet er ikke perfeksjon, men forutsigbarhet: medlemmer, foreldre og sponsorer skal vite hvor de finner informasjon, og få den når de trenger den.</p>
+                        </div>
+                        <div class="service-detail-sections">
+                            <div class="service-detail-section">
+                                <h4>Strategi og struktur</h4>
+                                <p>Vi starter med å kartlegge hvem dere må nå, hvilke kanaler som fungerer best, og hva som er realistisk å opprettholde. Deretter lager vi en plan som er enkel å følge og som ikke krever mer enn klubben kan levere.</p>
+                                <ul>
+                                    <li>Enkel kommunikasjonsplan tilpasset klubbens kapasitet</li>
+                                    <li>Kartlegging av målgrupper (foreldre, spillere, sponsorer, lokalsamfunn)</li>
+                                    <li>Kanalstrategi (Facebook, Instagram, nettside, e-post)</li>
+                                    <li>Årshjul med faste kommunikasjonspunkter</li>
+                                    <li>Maler for ukentlige oppdateringer, sesongstart, arrangement</li>
+                                    <li>Rutiner for hvem som gjør hva når</li>
+                                </ul>
+                            </div>
+                            <div class="service-detail-section">
+                                <h4>Innholdsproduksjon og opplæring</h4>
+                                <p>Vi kan produsere innhold for dere, eller lære opp noen i klubben til å gjøre det selv. Uansett sikrer vi at det finnes maler og rutiner som gjør jobben lettere.</p>
+                                <ul>
+                                    <li>Skriving av nyhetsartikler til nettside</li>
+                                    <li>Innlegg til sosiale medier (tekst og bildetekster)</li>
+                                    <li>Nyhetsbrev til medlemmer og sponsorer</li>
+                                    <li>Sponsorrapporter med bilder og statistikk</li>
+                                    <li>Rekrutteringsmateriell og informasjonsskriv</li>
+                                    <li>Opplæring av styremedlemmer i enkel publisering</li>
+                                    <li>Rådgivning om visuell profil og tone</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div style="text-align: center; margin-top: 40px; padding-top: 32px; border-top: 2px solid var(--border);">
+                            <a href="mailto:kontakt@sportera.no?subject=Forespørsel om kommunikasjon og synlighet" class="service-contact-btn">Ta kontakt om denne tjenesten</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service E Content -->
+                <div id="service-e" class="service-content">
+                    <div class="service-detail-card">
+                        <div class="service-detail-header">
+                            <h2 class="service-detail-title">Nettsider og digitale løsninger</h2>
+                            <div class="service-detail-goal">Funksjonelle nettsider som faktisk brukes</div>
+                        </div>
+                        <div class="service-detail-intro">
+                            <p>Mange idrettslag har en nettside som ligger der, men som aldri oppdateres. Årsaken er ofte at løsningen er for komplisert, for dyr, eller krever teknisk kompetanse ingen i styret har.</p>
+                            <p>Vi lager nettsider som er enkle å vedlikeholde, tydelige for brukerne, og som faktisk blir et nyttig verktøy for klubben. Ingen tung teknologi, ingen dyre månedlige kostnader, og ingen frustrasjon når noe skal endres.</p>
+                        </div>
+                        <div class="service-detail-sections">
+                            <div class="service-detail-section">
+                                <h4>Hva vi leverer</h4>
+                                <p>En nettside som gir brukerne det de trenger, og som klubben faktisk klarer å holde oppdatert. Vi prioriterer funksjonalitet og enkelhet fremfor fancy løsninger som ingen forstår.</p>
+                                <ul>
+                                    <li>Enkel nettside med tydelig struktur og navigasjon</li>
+                                    <li>Oversikt over lag, treningstider og kontaktpersoner</li>
+                                    <li>Nyhetsside for oppdateringer og arrangementer</li>
+                                    <li>Sponsorvisning med plass til logotyper og info</li>
+                                    <li>Billedgalleri fra kamper og aktiviteter</li>
+                                    <li>Kontaktskjema og viktig informasjon</li>
+                                    <li>Mobilvennlig design som funker på alle skjermer</li>
+                                </ul>
+                            </div>
+                            <div class="service-detail-section">
+                                <h4>Opplæring og support</h4>
+                                <p>Vi sørger for at noen i klubben faktisk kan oppdatere nettsiden. Det holder ikke å levere en side – den må kunne brukes i praksis.</p>
+                                <ul>
+                                    <li>Grundig gjennomgang av hvordan dere oppdaterer nettsiden</li>
+                                    <li>Videoveiledninger for vanlige oppgaver</li>
+                                    <li>Skriftlig dokumentasjon dere kan slå opp i</li>
+                                    <li>Oppfølging første måneden etter lansering</li>
+                                    <li>Mulighet for support ved behov</li>
+                                    <li>Tilpasset deres tekniske nivå og kapasitet</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div style="text-align: center; margin-top: 40px; padding-top: 32px; border-top: 2px solid var(--border);">
+                            <a href="mailto:kontakt@sportera.no?subject=Forespørsel om nettsider" class="service-contact-btn">Ta kontakt om denne tjenesten</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service F Content -->
+                <div id="service-f" class="service-content">
+                    <div class="service-detail-card">
+                        <div class="service-detail-header">
+                            <h2 class="service-detail-title">Prosjektdeltakelse</h2>
+                            <div class="service-detail-goal">Tilføre kapasitet i tidsavgrensede prosjekter</div>
+                        </div>
+                        <div class="service-detail-intro">
+                            <p>Noen oppgaver krever ekstra innsats over en avgrenset periode – en stor cup, et digitaliseringsprosjekt, eller omorganisering. I slike tilfeller kan det være avgjørende med noen som kan tre inn, ta ansvar, og sørge for at ting faktisk blir gjort.</p>
+                            <p>Vi blir med på laget så lenge dere trenger oss – enten som prosjektleder, prosjektstøtte, eller koordinator. Målet er at prosjektet når målene sine, innenfor tid og budsjett, og at klubben sitter igjen med verdifull erfaring og resultater de kan bygge videre på.</p>
+                        </div>
+                        <div class="service-detail-sections">
+                            <div class="service-detail-section">
+                                <h4>Prosjekttyper vi støtter</h4>
+                                <p>Vi har erfaring med en rekke ulike prosjekttyper, fra konkrete arrangementer til større omstillinger. Felles for alle er at de har et definert mål og en avgrenset tidsramme.</p>
+                                <ul>
+                                    <li>Større cuper og turneringsprosjekter</li>
+                                    <li>Digitalisering og systemskifter</li>
+                                    <li>Rekrutteringskampanjer og medlemsvekst</li>
+                                    <li>Anleggsprosjekter og søknadsprosesser</li>
+                                    <li>Organisasjonsutvikling og omstrukturering</li>
+                                    <li>Jubileum, store markeringer og kampanjer</li>
+                                    <li>Kommersiell utvikling og samarbeidsprosjekter</li>
+                                </ul>
+                            </div>
+                            <div class="service-detail-section">
+                                <h4>Vår rolle</h4>
+                                <p>Vi tilpasser rollen etter hva prosjektet og klubben trenger. Noen ganger er det nødvendig med en tydelig prosjektleder, andre ganger holder det med støtte og koordinering.</p>
+                                <ul>
+                                    <li>Prosjektledelse med fremdrift og milepælstyring</li>
+                                    <li>Prosjektstøtte som avlaster styret</li>
+                                    <li>Koordinering mellom styret, frivillige og eksterne</li>
+                                    <li>Møteledelse og beslutningsgrunnlag</li>
+                                    <li>Dokumentasjon og rapportering</li>
+                                    <li>Evaluering og erfaringsoverføring</li>
+                                    <li>Sikring av at prosjektet når målene sine</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div style="text-align: center; margin-top: 40px; padding-top: 32px; border-top: 2px solid var(--border);">
+                            <a href="mailto:kontakt@sportera.no?subject=Forespørsel om prosjektdeltakelse" class="service-contact-btn">Ta kontakt om denne tjenesten</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service G Content -->
+                <div id="service-g" class="service-content">
+                    <div class="service-detail-card">
+                        <div class="service-detail-header">
+                            <h2 class="service-detail-title">Ekstern gjennomgang av idrettslaget</h2>
+                            <div class="service-detail-goal">Gi klubben et ærlig og konstruktivt utenfrablikk</div>
+                        </div>
+                        <div class="service-detail-intro">
+                            <p>Når man er inne i organisasjonen, er det lett å ikke se skogen for bare trær. Man gjør ting på samme måte år etter år, uten å stille spørsmål ved om det finnes bedre løsninger. Styremedlemmer brenner seg ut, inntekter forblir uutnyttet, og muligheter går tapt – uten at noen egentlig vet hvorfor.</p>
+                            <p>En ekstern gjennomgang gir dere objektive innspill på hva som fungerer bra, hvor det er forbedringspotensialer, og hvilke grep dere bør prioritere. Vi ser på helheten med friske øyne, sammenligner med andre klubber, og gir dere konkrete anbefalinger dere kan handle på.</p>
+                        </div>
+                        <div class="service-detail-sections">
+                            <div class="service-detail-section">
+                                <h4>Hva vi gjennomgår</h4>
+                                <p>Vi ser på hele klubbdriften – fra organisering og økonomi til kommunikasjon og frivilligbruk. Målet er å identifisere både det som fungerer godt (og bør videreføres) og det som kan gjøres bedre.</p>
+                                <ul>
+                                    <li>Organisasjonsstruktur, roller og ansvarsfordeling</li>
+                                    <li>Styrets arbeidsbelastning og møteeffektivitet</li>
+                                    <li>Økonomi, inntektskilder og kostnadsstruktur</li>
+                                    <li>Sponsorarbeid, avtaler og partnerdialog</li>
+                                    <li>Arrangementdrift og dugnadsbruk</li>
+                                    <li>Kommunikasjon, nettsider og synlighet</li>
+                                    <li>Kontinuitet, rutiner og dokumentasjon</li>
+                                </ul>
+                            </div>
+                            <div class="service-detail-section">
+                                <h4>Prosess og leveranse</h4>
+                                <p>Gjennomgangen starter med intervjuer og datainnsamling, deretter analyserer vi funnene og presenterer anbefalinger. Dere får en konkret rapport med prioriterte tiltak og forslag til videre prosess.</p>
+                                <ul>
+                                    <li>Intervjuer med styremedlemmer og nøkkelpersoner</li>
+                                    <li>Gjennomgang av økonomiske data og avtaler</li>
+                                    <li>Kartlegging av dagens rutiner og systemer</li>
+                                    <li>Sammenligning med andre klubber på tilsvarende nivå</li>
+                                    <li>Identifisering av forbedringsområder</li>
+                                    <li>Presentasjon av funn og anbefalinger</li>
+                                    <li>Dialog om prioriteringer og veien videre</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div style="text-align: center; margin-top: 40px; padding-top: 32px; border-top: 2px solid var(--border);">
+                            <a href="mailto:kontakt@sportera.no?subject=Forespørsel om ekstern gjennomgang" class="service-contact-btn">Ta kontakt om denne tjenesten</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service H Content -->
+                <div id="service-h" class="service-content">
+                    <div class="service-detail-card">
+                        <div class="service-detail-header">
+                            <h2 class="service-detail-title">Digital markedsføring</h2>
+                            <div class="service-detail-goal">Nå riktig målgruppe med riktig budskap</div>
+                        </div>
+                        <div class="service-detail-intro">
+                            <p>Sosiale medier og digitale kanaler er viktige verktøy for idrettslag, men mange klubber vet ikke helt hvor de står eller hvordan de kan utnytte mulighetene bedre. Hva fungerer? Hva når vi ikke frem med? Hvor skal vi prioritere innsatsen?</p>
+                            <p>Vi hjelper dere med å kartlegge hva dere gjør i dag, identifisere forbedringsområder, og utvikle en strategi som faktisk er mulig å gjennomføre. Målet er ikke perfeksjon, men bedre resultater med den innsatsen dere har kapasitet til.</p>
+                        </div>
+                        <div class="service-detail-sections">
+                            <div class="service-detail-section">
+                                <h4>Kartlegging og analyse</h4>
+                                <p>Vi starter med å se på hva dere gjør i dag – hvilke kanaler brukes, hva slags innhold publiseres, og hvilke resultater det gir. Dette gir et solid grunnlag for å vite hva som bør forbedres.</p>
+                                <ul>
+                                    <li>Gjennomgang av eksisterende tiltak på sosiale medier og digitale flater</li>
+                                    <li>Analyse av hva som fungerer og hva som ikke når fram</li>
+                                    <li>Kartlegging av målgrupper og deres bruksmønstre</li>
+                                    <li>Vurdering av frekvens, innholdstype og engasjement</li>
+                                    <li>Identifisering av uutnyttede muligheter</li>
+                                    <li>Sammenligning med lignende klubber</li>
+                                </ul>
+                            </div>
+                            <div class="service-detail-section">
+                                <h4>Strategi og gjennomføring</h4>
+                                <p>Basert på kartleggingen utvikler vi en strategi som er skreddersydd for deres situasjon. Dette inkluderer konkrete anbefalinger for innhold, kanaler og frekvens – tilpasset ulike målgrupper som foreldre, utøvere, sponsorer og lokalsamfunnet.</p>
+                                <ul>
+                                    <li>Strategi for sosiale medier tilpasset ulike målgrupper</li>
+                                    <li>Innholdsplan med konkrete forslag til poster og kampanjer</li>
+                                    <li>Kanalprioritering – hvor skal dere bruke tiden?</li>
+                                    <li>Retningslinjer for tone, visuelle profil og budskap</li>
+                                    <li>Årshjul for markedsføringstiltak</li>
+                                    <li>Forslag til verktøy og løsninger som forenkler arbeidet</li>
+                                    <li>Opplæring i gjennomføring for relevante personer i klubben</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div style="text-align: center; margin-top: 40px; padding-top: 32px; border-top: 2px solid var(--border);">
+                            <a href="mailto:kontakt@sportera.no?subject=Forespørsel om digital markedsføring" class="service-contact-btn">Ta kontakt om denne tjenesten</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ABOUT PAGE -->
+    <div id="about" class="page">
+        <section class="about-section">
+            <div class="container">
+                <div class="about-content">
+                    <div class="about-profile">
+                        <div class="profile-avatar">K</div>
+                        <h3 class="profile-name">Sportera</h3>
+                        <p class="profile-title">Grunnlegger & Konsulent</p>
+                        
+                        <div class="profile-credentials">
+                            <div class="credential-item">
+                                <span>• Master i Sport Management</span>
+                            </div>
+                            <div class="credential-item">
+                                <span>• Erfaring fra toppidrett og bredde</span>
+                            </div>
+                            <div class="credential-item">
+                                <span>• Søknadsprosesser og finansiering</span>
+                            </div>
+                            <div class="credential-item">
+                                <span>• Digital kompetanse</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="about-text">
+                        <h2>Hvorfor Sportera ble til</h2>
+                        <p>
+                            Jeg har vært aktiv i idretten hele livet – som utøver, trener og i ulike roller i klubber på alle nivåer. Det har gitt meg innsikt i både gleden ved å drive frivillig, og frustrasjonen når administrative oppgaver tar overhånd.
+                        </p>
+                        <p>
+                            Alt for ofte ser jeg klubber som sliter. Styremedlemmer som brenner seg ut. Sponsormuligheter som aldri blir fulgt opp. Søknadsfrister som går ut. Arrangement som kunne gitt bedre inntjening. Ikke fordi folk ikke vil, men fordi det mangler tid, struktur eller kompetanse på enkelte områder.
+                        </p>
+                        <p>
+                            Sportera handler om å fylle akkurat de hullene – uten at klubben må ansette noen. Det skal være enkelt å få hjelp når man trenger det, til det man faktisk trenger det til.
+                        </p>
+                        
+                        <h3>Kompetanse fra utdanning og praksis</h3>
+                        <p>
+                            Gjennom studier i Sport Management har jeg fordypet meg i hvordan idrettslag fungerer – og hvordan de kan fungere bedre. Organisasjonsutvikling, økonomistyring, sponsorarbeid og kommersielle modeller er områder jeg har jobbet grundig med, både teoretisk og praktisk.
+                        </p>
+                        <p>
+                            Jeg har hatt gleden av å jobbe med både elite- og breddeidrett, og sett hvordan gode systemer og strukturer kan gjøre stor forskjell – uansett nivå. Erfaring fra ulike roller i idretten har gitt meg forståelse for klubbenes faktiske hverdag, ikke bare hvordan det ser ut på papiret.
+                        </p>
+                        <p>
+                            Gjennom arbeid med søknadsprosesser har jeg lært hva som skal til for å få innvilget støtte – både fra offentlige ordninger og private fond. Det handler like mye om å forstå hva støttegiverne ser etter, som å skrive godt.
+                        </p>
+                        <p>
+                            Min erfaring fra breddeidretten holder meg tett på klubbdriftens virkelighet. Jeg vet hva som faktisk fungerer når ressursene er knappe og frivillige har begrenset tid.
+                        </p>
+                        
+                        <h3>Hva jeg er spesielt opptatt av</h3>
+                        <div class="expertise-grid">
+                            <div class="expertise-item">
+                                <h4>Digitale verktøy som fungerer</h4>
+                                <p>Jeg brenner for digitale løsninger som faktisk brukes. Ikke fancy systemer ingen skjønner, men verktøy som gjør hverdagen enklere.</p>
+                            </div>
+                            <div class="expertise-item">
+                                <h4>Struktur som varer</h4>
+                                <p>Gode rutiner og systemer sikrer at klubben ikke starter på null hver gang styret bytter. Kontinuitet er nøkkelen.</p>
+                            </div>
+                            <div class="expertise-item">
+                                <h4>Inntekter som er realistiske</h4>
+                                <p>Sponsorarbeid og søknader som passer klubbens nivå og kapasitet. Ingen luftslott, bare gjennomførbare løsninger.</p>
+                            </div>
+                            <div class="expertise-item">
+                                <h4>Å faktisk få ting gjort</h4>
+                                <p>Planer er fine, men gjennomføring er det som teller. Jeg hjelper klubber med å komme i mål med det de har startet på.</p>
+                            </div>
+                        </div>
+                        
+                        <h3>Hvordan jeg jobber</h3>
+                        <p>
+                            Jeg tror ikke på standardløsninger. Hver klubb har sin egen situasjon, sitt eget nivå og sine egne utfordringer. Derfor starter jeg alltid med å lytte – hva trenger dere faktisk? Hva er realistisk å få til? Hva gir mest verdi akkurat nå?
+                        </p>
+                        <p>
+                            Så jobber vi sammen om løsninger som passer. Noen ganger er det en konkret oppgave som skal løses. Andre ganger er det langvarig støtte over tid. Uansett er målet at klubben skal stå sterkere når vi er ferdige – og helst ha lært noe underveis som dere kan bruke fremover.
+                        </p>
+                        <p>
+                            Sportera er ikke en storebror som kommer inn og tar over. Det er en støttespiller som står ved siden av dere når dere trenger det.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="cta-content">
+                <h2>Vil du vite mer?</h2>
+                <p>Ta kontakt for å diskutere hvordan Sportera kan støtte ditt idrettslag.</p>
+                <a href="mailto:kontakt@sportera.no" class="btn-cta">Send e-post</a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <div class="footer-brand">
+                    <img src="sportera-logo-horizontal.png" alt="Sportera" class="logo-image">
+                </div>
+                <p>Profesjonell støtte for idrettslag som ønsker å utvikle seg og øke inntekter – uten å ansette egne ressurser.</p>
+                <p><strong>E-post:</strong> kontakt@sportera.no</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Tjenester</h4>
+                <ul class="footer-links">
+                    <li><a href="#" onclick="showPage('services'); showService('service-a')">Søknader og finansiering</a></li>
+                    <li><a href="#" onclick="showPage('services'); showService('service-b')">Sponsor og samarbeid</a></li>
+                    <li><a href="#" onclick="showPage('services'); showService('service-c')">Arrangement</a></li>
+                    <li><a href="#" onclick="showPage('services')">Alle tjenester</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Om oss</h4>
+                <ul class="footer-links">
+                    <li><a href="#" onclick="showPage('about')">Om Sportera</a></li>
+                    <li><a href="#kontakt">Kontakt oss</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Sportera. Profesjonell støtte for idrettslag.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll-triggered animations with Intersection Observer
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create observer for scroll animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        // Get all siblings to stagger animation
+                        const element = entry.target;
+                        const siblings = Array.from(element.parentElement.children);
+                        const elementIndex = siblings.indexOf(element);
+                        
+                        setTimeout(() => {
+                            element.classList.add('visible');
+                        }, elementIndex * 100);
+                        
+                        observer.unobserve(element);
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe all animated elements
+            document.querySelectorAll('.service-compact-card, .value-item, .approach-card').forEach(el => {
+                observer.observe(el);
+            });
+        });
+        
+        // Page navigation
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo(0, 0);
+            
+            return false;
+        }
+        
+        // Service tab navigation - SCROLL TO TOP
+        function showService(serviceId) {
+            // Hide all service contents
+            document.querySelectorAll('.service-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.service-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected service
+            document.getElementById(serviceId).classList.add('active');
+            
+            // Add active class to clicked tab
+            event.currentTarget.classList.add('active');
+            
+            // Scroll to top of services section smoothly
+            const servicesSection = document.querySelector('.services-section');
+            if (servicesSection) {
+                servicesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+    </script>
+</body>
+</html>
