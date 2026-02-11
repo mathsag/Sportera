@@ -946,7 +946,7 @@
         
         /* Footer */
         footer {
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
             color: white;
             padding: 80px 40px 40px;
         }
@@ -983,7 +983,9 @@
         }
         
         .footer-brand .logo-image {
-            /* Logo will show normally on white background */
+            background: white;
+            padding: 8px 16px;
+            border-radius: 6px;
         }
         
         .footer-brand .logo-icon {
@@ -1048,6 +1050,11 @@
             display: block;
         }
         
+        /* Coming Soon Section - Two column grid */
+        .coming-soon-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        
         /* Responsive */
         @media (max-width: 1024px) {
             .footer-content {
@@ -1092,12 +1099,21 @@
             .approach-section,
             .cta-section,
             .about-section,
-            .services-preview {
+            .services-preview,
+            .value-section {
                 padding: 60px 20px;
             }
             
             .value-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .coming-soon-grid {
+                grid-template-columns: 1fr !important;
+            }
+            
+            .coming-soon-grid .value-item {
+                padding: 32px 20px !important;
             }
             
             .approach-grid {
@@ -1133,7 +1149,7 @@
                 <a href="#" onclick="showPage('home')">Hjem</a>
                 <a href="#" onclick="showPage('services')">Tjenester</a>
                 <a href="#" onclick="showPage('about')">Om oss</a>
-                <a href="#kontakt" class="nav-cta">Kontakt oss</a>
+                <a href="mailto:kontakt@sportera.no" class="nav-cta">Kontakt oss</a>
             </div>
         </div>
     </nav>
@@ -1146,7 +1162,7 @@
                 <h1>Profesjonell støtte for idrettslag</h1>
                 <p class="hero-subtitle">Vi støtter idrettslag med kompetanse og kapasitet i områder der dere trenger det mest – uten faste ansettelser. Provisjonsbasert på sponsorer og søknader betyr minimal risiko.</p>
                 <div class="hero-buttons">
-                    <a href="#kontakt" class="btn-primary">Ta kontakt</a>
+                    <a href="mailto:kontakt@sportera.no" class="btn-primary">Ta kontakt</a>
                     <a href="#" onclick="showPage('services')" class="btn-secondary">Se alle tjenester</a>
                 </div>
             </div>
@@ -1278,7 +1294,7 @@
                     <p class="section-description">Vi jobber med digitale løsninger som vil løfte sponsorarbeidet til neste nivå</p>
                 </div>
                 
-                <div class="value-grid" style="grid-template-columns: repeat(2, 1fr);">
+                <div class="value-grid coming-soon-grid">
                     <div class="value-item" style="text-align: left; padding: 48px 40px;">
                         <div class="value-icon" style="margin-bottom: 24px;">📱</div>
                         <h3 style="font-size: 1.4rem; margin-bottom: 16px;">Digital sponsorapp</h3>
@@ -1758,7 +1774,9 @@
             <div class="container">
                 <div class="about-content">
                     <div class="about-profile">
-                        <div class="profile-avatar">K</div>
+                        <div style="text-align: center; margin-bottom: 24px;">
+                            <img src="sportera-logo-horizontal.png" alt="Sportera" style="height: 50px; width: auto;">
+                        </div>
                         <h3 class="profile-name">Sportera</h3>
                         <p class="profile-title">Grunnlegger & Konsulent</p>
                         
@@ -1845,10 +1863,10 @@
         <div class="footer-content">
             <div class="footer-about">
                 <div class="footer-brand">
-                    <img src="sportera-logo-horizontal.png" alt="Sportera" class="logo-image">
+                    <img src="sportera-logo-linje.png" alt="Sportera" class="logo-image">
                 </div>
                 <p>Profesjonell støtte for idrettslag som ønsker å utvikle seg og øke inntekter – uten å ansette egne ressurser.</p>
-                <p><strong>E-post:</strong> kontakt@sportera.no</p>
+                <p><strong>E-post:</strong> <a href="mailto:kontakt@sportera.no" style="color: white;">kontakt@sportera.no</a></p>
             </div>
             
             <div class="footer-section">
@@ -1865,7 +1883,7 @@
                 <h4>Om oss</h4>
                 <ul class="footer-links">
                     <li><a href="#" onclick="showPage('about')">Om Sportera</a></li>
-                    <li><a href="#kontakt">Kontakt oss</a></li>
+                    <li><a href="mailto:kontakt@sportera.no">Kontakt oss</a></li>
                 </ul>
             </div>
         </div>
@@ -1875,7 +1893,7 @@
         </div>
     </footer>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // Scroll-triggered animations with Intersection Observer
         document.addEventListener('DOMContentLoaded', function() {
             // Create observer for scroll animations
@@ -1921,6 +1939,7 @@
         
         // Service tab navigation - SCROLL TO TOP
         function showService(serviceId) {
+            // Hide all service content
             // Hide all service contents
             document.querySelectorAll('.service-content').forEach(content => {
                 content.classList.remove('active');
