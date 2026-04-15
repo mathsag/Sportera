@@ -305,23 +305,76 @@
             .footer-grid { grid-template-columns: 1fr; gap: 36px; }
         }
 
+        /* HAMBURGER */
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+        .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); transition: all 0.3s; }
+        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        .mobile-menu {
+            display: none;
+            position: fixed; top: 68px; left: 0; right: 0;
+            background: var(--beige);
+            border-bottom: 1px solid var(--border);
+            padding: 20px 24px;
+            z-index: 199;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .mobile-menu.open { display: flex; }
+        .mobile-menu a {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-mid);
+            text-decoration: none;
+        }
+        .mobile-menu a:last-child { border-bottom: none; }
+        .mobile-menu a.nav-cta { background: var(--navy); color: var(--beige) !important; padding: 12px 20px; border-radius: 3px; text-align: center; margin-top: 8px; border: none; }
+
         @media (max-width: 768px) {
             nav { padding: 0 24px; }
-            .nav-links a:not(.nav-cta) { display: none; }
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            .hero { min-height: 88vh; }
             .hero-left { padding: 80px 24px 80px; }
-            .services-section, .coming-section, .approach-section, .cta-section { padding: 60px 24px; }
+            .hero h1 { font-size: 2.6rem; }
+            .services-section { padding: 60px 24px; }
+            .coming-section { padding: 60px 24px; }
+            .klubblink-section { padding: 60px 24px; }
+            .klubblink-inner { grid-template-columns: 1fr; gap: 40px; }
+            .phone-mockup { padding: 0; }
+            .phone-frame { width: 220px; }
+            .phone-screen { min-height: 400px; }
+            .cta-section { padding: 60px 24px; }
             .services-page-hero, .about-hero { padding: 60px 24px 48px; }
             .service-content { padding: 40px 24px 60px; }
+            .service-content-inner { gap: 32px; }
+            .service-block { padding: 24px; }
             .tab-bar { padding: 0 16px; }
-            .about-body { padding: 48px 24px; }
+            .tab-btn { padding: 12px 12px; font-size: 0.78rem; gap: 6px; }
+            .about-body { padding: 48px 24px; gap: 40px; }
             .pricing-band { padding: 36px 24px; flex-direction: column; align-items: flex-start; gap: 20px; }
             footer { padding: 48px 24px 32px; }
-            .services-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; gap: 36px; }
+            .services-grid { grid-template-columns: 1fr 1fr; }
             .coming-grid { grid-template-columns: 1fr; }
-            .klubblink-inner { grid-template-columns: 1fr; }
             .expertise-grid { grid-template-columns: 1fr; }
             .approach-grid { grid-template-columns: 1fr; }
             .pillars-grid { grid-template-columns: 1fr 1fr; }
+            .section-title { font-size: 1.7rem; }
+            .profile-card { padding: 24px; }
+        }
+
+        @media (max-width: 480px) {
+            .services-grid { grid-template-columns: 1fr; }
+            .pillars-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2.2rem; }
+            .hero-actions { flex-direction: column; }
+            .hero-actions a { text-align: center; }
+            .phone-frame { width: 200px; }
         }
     </style>
 </head>
@@ -337,7 +390,16 @@
         <a href="#" onclick="showPage('about'); return false;">Om oss</a>
         <a href="mailto:kontakt@sportera.no" class="nav-cta">Kontakt oss</a>
     </div>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Meny">
+        <span></span><span></span><span></span>
+    </button>
 </nav>
+<div class="mobile-menu" id="mobileMenu">
+    <a href="#" onclick="showPage('home'); closeMobileMenu(); return false;">Hjem</a>
+    <a href="#" onclick="showPage('services'); closeMobileMenu(); return false;">Tjenester</a>
+    <a href="#" onclick="showPage('about'); closeMobileMenu(); return false;">Om oss</a>
+    <a href="mailto:kontakt@sportera.no" class="nav-cta">Kontakt oss</a>
+</div>
 
 <!-- HOME -->
 <div id="home" class="page active">
@@ -835,10 +897,21 @@
 </footer>
 
 <script>
+    function toggleMenu() {
+        document.getElementById('hamburger').classList.toggle('open');
+        document.getElementById('mobileMenu').classList.toggle('open');
+    }
+
+    function closeMobileMenu() {
+        document.getElementById('hamburger').classList.remove('open');
+        document.getElementById('mobileMenu').classList.remove('open');
+    }
+
     function showPage(id) {
         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
         document.getElementById(id).classList.add('active');
         window.scrollTo(0, 0);
+        closeMobileMenu();
     }
 
     function showService(id) {
